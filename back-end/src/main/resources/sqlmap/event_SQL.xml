@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="event">
-	<insert id="insert" parameterType="Event" useGeneratedKeys="true" keyProperty="event_id">  
+
+<insert id="insert" parameterType="event" useGeneratedKeys="true" keyProperty="book_id">  
     <![CDATA[
-    insert into book
-    (EventName, Participant, Payer, EventDate, Price, DividePrice) 
+    insert into event
+    (EventName, Participant, Payer, EventDate, Price) 
     values
-    (#{EventName}, #{Participant}, #{Payer}, #{EventDate}, #{Price}, #{DividePrice})
+    (#{EventName}, #{Participant}, #{Payer}, #{EventDate}, #{Price})
     ]]>
 </insert>
-</mapper>
+
+<select id="getEventBriefly" parameterType="travel" resultType="event">
+	<![CDATA[
+		select
+		EventName,
+		Payer,
+		Price,
+		Date
+		from
+		event
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<select id="getEventDetail" parameterType="event" resultType="event">
+	<![CDATA[이름, 결제자, 금액, 참가자, 날짜
+		select
+		EventName,
+		Payer,
+		Price,
+		Participant,
+		Date
+		from
+		event
+		where
+		Event_id = #{Event_id}
+	]]>
+</select>
+
+<select id="getWhatEventIn" parameterType="person" resultType="event">
+	<![CDATA[
+		select
+		EventName,
+		EventDate,
+		Price,
+		Payer,
+		Participant
+		from
+		event
+		where
+		participant LIKE
+		concat('%', #{PersonName}, '%')
+	]]>
+</select>
+
+<select id="getEventNum" parameterType="travel" resultType="int">
+	<![CDATA[
+		select
+		count(*)
+		from
+		event
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+
+</mapper>	
