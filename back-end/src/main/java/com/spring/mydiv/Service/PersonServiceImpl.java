@@ -9,14 +9,16 @@ import com.spring.mydiv.Dto.Person;
 
 @Service
 public class PersonServiceImpl implements PersonService {
+	
 	@Autowired
 	private PersonDao personDao;
 		
 	@Override
 	public String CreatePerson(Person person) {
-		personDao.insert(person);
-		
-		return "Service --> DAO : Success";
+		int affectRowCount = this.personDao.insert(person);
+	    if (affectRowCount ==  1) { // 1 = success
+	    }
+	    return null;
 	}
 	
 	@Override

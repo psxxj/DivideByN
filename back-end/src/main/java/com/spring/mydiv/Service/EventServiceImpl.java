@@ -15,8 +15,11 @@ public class EventServiceImpl implements EventService {
 		
 	@Override
 	public String CreateEvent(Event event){
-		eventDao.insert(event);
-		
+		int affectRowCount = this.eventDao.insert(event);
+	    if (affectRowCount ==  1) { // 1 = success
+	    }
+	    
+	    
 		for(Person parti : event.getParticipant()) {
 			parti.getWillSend().add(event);
 			personService.get_difference(parti);

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Person {
 	
-	private String PersonName;
-	private String Account;
+	private String PersonName; //in personDB
+	private String Account; //in personDB
 	private ArrayList<Person> getterALL = new ArrayList<>();
 	private ArrayList<Event> willSend = new ArrayList<>();
 	private ArrayList<Event> willGet = new ArrayList<>();
@@ -13,10 +13,12 @@ public class Person {
 	private double sumSend;
 	private double sumGet;
 	private int Difference;
+	private String TravelName;
 	
-	public Person(String PersonName, String Account){
+	public Person(String PersonName, String Account, Travel travel){
 		this.setPersonName(PersonName);
 		this.setAccount(Account);
+		this.setTravelName(travel.getTravelName());
 	}
 
 	public String getPersonName() {
@@ -90,6 +92,13 @@ public class Person {
 	public void setDifference(int difference) {
 		Difference = difference;
 	}
-	
+
+	public String getTravelName() {
+		return TravelName;
+	}
+
+	public void setTravelName(String travelName) {
+		this.TravelName = travelName;
+	}
 }
 	

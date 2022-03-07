@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class Travel {
 
-	private String TravelName;
+	private String TravelName; //in travelDB
 	private ArrayList<Event> EventALL = new ArrayList<>();
 	private ArrayList<Person> PersonALL = new ArrayList<>();
 	private Person Leader;
+	//"TravelDate" in travelDB
 	
 	public Travel(String travelName) {
 		this.setTravelName(travelName);

@@ -1,5 +1,7 @@
 package com.spring.mydiv.Dao;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.mydiv.Dto.Travel;
@@ -7,16 +9,28 @@ import com.spring.mydiv.Dto.Travel;
 @Repository
 public class TravelDao {
 	
-	public String insert(Travel travel) {
-		return "finish";
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;
+	
+	// [from user] insert name
+	public int insert(Travel travel) {
+		return this.sqlSessionTemplate.insert("travel.insert", travel);
 	}
 	
-	public String update(Travel travel) {
-		return "update";
+	
+	
+	
+	// [from user] update name
+	public int update(Travel travel) {  
+		return this.sqlSessionTemplate.update("travel.update", travel);  
 	}
 	
-	public Travel select(int num) {
-		Travel Traveltest = new Travel("불러오기");
-		return Traveltest;
+	
+	
+	public Travel select(Travel travel) {
+		return this.sqlSessionTemplate.selectOne("travel.select", travel);
 	}
+	
+	
+	
 }

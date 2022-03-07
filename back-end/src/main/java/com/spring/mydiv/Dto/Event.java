@@ -10,16 +10,17 @@ import lombok.Setter;
 public class Event {
 	
 	@Getter @Setter
-	private String EventName;
-	private ArrayList<Person> Participant = new ArrayList<>();
-	private Person Payer;
-	private Date EventDate = new Date();
-	private int Price;
+	private String EventName; //in eventDB
+	private ArrayList<Person> Participant = new ArrayList<>(); //in eventDB
+	private String Participant2String;
+	private Person Payer; //in eventDB
+	private Date EventDate = new Date(); //in eventDB
+	private int Price; //in eventDB
 	private double DividePrice;
 	
 	public Event(String eventname, ArrayList<Person> participant, Person payer, Date eventdate, int price){ // »ý¼ºÀÚ
 		this.EventName = eventname;
-		this.Participant = participant; // 
+		this.Participant = participant;
 		this.Payer = payer;
 		this.EventDate = eventdate;
 		this.Price = price;
@@ -45,4 +46,7 @@ public class Event {
 		DividePrice = dividePrice;
 	}
 	
+	public void setParticipant2String() {
+		Participant2String = String.join(", ", Participant.getPersonName());
+	}
 }

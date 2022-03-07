@@ -11,17 +11,18 @@ import com.spring.mydiv.Dto.Travel;
 
 @Service
 public class TravelServiceImpl implements TravelService {
+	
 	@Autowired
 	private TravelDao travelDao;
-	
 	@Autowired
 	private PersonService personService;
 	
 	@Override
 	public String CreateTravel(Travel travel) {
-		travelDao.insert(travel);
-		
-		return "Service --> DAO : Success";
+		int affectRowCount = this.travelDao.insert(travel);
+	    if (affectRowCount ==  1) { // 1 = success
+	    }
+	    return null;
 	}
 	
 	@Override
