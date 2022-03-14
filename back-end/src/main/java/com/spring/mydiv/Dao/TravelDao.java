@@ -12,7 +12,6 @@ public class TravelDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	// [from user] insert name
 	public int insert(Travel travel) {
 		return this.sqlSessionTemplate.insert("travel.insert", travel);
 	}
@@ -24,9 +23,7 @@ public class TravelDao {
 	public int update(Travel travel) {  
 		return this.sqlSessionTemplate.update("travel.update", travel);  
 	}
-	
-	
-	
+
 	public Travel select(Travel travel) {
 		return this.sqlSessionTemplate.selectOne("travel.select", travel);
 	}

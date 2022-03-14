@@ -3,6 +3,7 @@ package com.spring.mydiv.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.mydiv.Dao.EventDao;
 import com.spring.mydiv.Dao.TravelDao;
 import com.spring.mydiv.Dto.Event;
 import com.spring.mydiv.Dto.Person;
@@ -17,15 +18,23 @@ public class TravelServiceImpl implements TravelService {
 	@Autowired
 	private PersonService personService;
 	
-	@Override
+	@Override //->
 	public String CreateTravel(Travel travel) {
 		int affectRowCount = this.travelDao.insert(travel);
 	    if (affectRowCount ==  1) { // 1 = success
+	    	return travel.getTravelName(); //<-
 	    }
 	    return null;
 	}
+
 	
-	@Override
+
+	
+
+	
+	
+	
+	@Override //<-
 	public void getPerson(Person person) {
 		Travel travel = travelDao.select(1);
 		travel.getPersonALL().add(person);

@@ -5,13 +5,14 @@
 <insert id="insert" parameterType="event" useGeneratedKeys="true" keyProperty="Event_id">  
     <![CDATA[
     insert into eventDB
-    (EventName, Participant, Payer, EventDate, Price, TravelName) 
+    (EventName, Participant2String, Payer, EventDate, Price, TravelName) 
     values
-    (#{EventName}, #{Participant}, #{Payer}, #{EventDate}, #{Price}, #{TravelName})
+    (#{EventName}, #{Participant2String}, #{Payer}, #{EventDate}, #{Price}, #{TravelName})
     ]]>
 </insert>
 
-<select id="getEventBriefly" parameterType="travel" resultType="event">
+
+<select id="getEventBriefly" parameterType="String" resultType="event">
 	<![CDATA[
 		select
 		EventName,
@@ -21,7 +22,7 @@
 		from
 		eventDB
 		where
-		TravelName = #{TravelName}
+		TravelName = #{travelName}
 	]]>
 </select>
 
@@ -56,14 +57,42 @@
 	]]>
 </select>
 
-<select id="getEventNum" parameterType="travel" resultType="int">
+<select id="getEventNum" parameterType="String" resultType="int">
 	<![CDATA[
 		select
 		count(*)
 		from
-		event
+		eventDB
 		where
-		TravelName = #{TravelName}
+		TravelName = #{travelName}
+	]]>
+</select>
+
+<select id="getOldest" parameterType="String" resultType="Date">
+	<![CDATA[
+		select
+		EventDate
+		from
+		eventDB
+		where
+		TravelName = #{travel}
+		order by
+		EventDate ASC
+		limit 1
+	]]>
+</select>
+
+<select id="getLatest" parameterType="String" resultType="Date">
+	<![CDATA[
+		select
+		EventDate
+		from
+		eventDB
+		where
+		TravelName = #{travel}
+		order by
+		EventDate DESC
+		limit 1
 	]]>
 </select>
 

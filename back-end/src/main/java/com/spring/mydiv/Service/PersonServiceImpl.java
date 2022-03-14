@@ -1,5 +1,7 @@
 package com.spring.mydiv.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +14,17 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Autowired
 	private PersonDao personDao;
-		
+	
 	@Override
-	public String CreatePerson(Person person) {
+	public List<Person> CreatePerson(Person person) {
 		int affectRowCount = this.personDao.insert(person);
 	    if (affectRowCount ==  1) { // 1 = success
+	    	String travelName = person.getTravelName();
+	    	return this.personDao.getPersonBriefly(travelName);
 	    }
-	    return null;
+	    return null; // ??
 	}
+	
 	
 	@Override
 	public void UpdatePerson(Person person) {
@@ -28,9 +33,11 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	public void get_difference(Person person) {
-		get_sumSend(person);
-		get_sumGet(person);
-		person.setDifference((int)(person.getSumGet() - person.getSumSend()));
+		get_sumSend(person); //
+		get_sumGet(person); //
+		person.setDifference(person.getSumGet() - person.getSumSend());
+		if (person.getDifference() >= 0) {person.setRole("GETTER");}
+		else {person.setRole("SENDER");};
 		UpdatePerson(person);
 	}
 
@@ -50,5 +57,21 @@ public class PersonServiceImpl implements PersonService {
 		UpdatePerson(person);
 	}
 	
-	// not yet print
+	public Person ShowPerson(Person person) {
+		String personName = person.getPersonName();
+		return this.personDao.getPersonDetail(person);
+	}
+	
+	public List<Event> ShowWhatEventIn(Person person) {
+		return this.personDao.getWhatEventIn(person);
+	}
+	
+	public Person ShowPerson(Person person) {
+		return this.personDao.getWhatEventIn(person);
+	}
+	
+	public String PrintOrder(Person person) {
+		
+	}
+
 }

@@ -16,10 +16,18 @@ public class PersonDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	// [from user] insert name, account
 	public int insert(Person person) {
 		return this.sqlSessionTemplate.insert("person.insert", person);
 	}
+	
+	public List<Person> getPersonBriefly(String travel){
+		List<Person> list = this.sqlSessionTemplate.selectList("person.getPersonBriefly", travel);
+		return list;
+	}
+	
+	
+	
+	
 	// [from user] update name, account
 	public int update(Person person) {
 		return this.sqlSessionTemplate.update("person.update", person);
@@ -31,10 +39,7 @@ public class PersonDao {
 		return list;
 	}
 	// [to main_person] name, role, difference
-	public List<Person> getPersonBriefly(Travel travel){
-		List<Person> list = this.sqlSessionTemplate.selectList("person.getPersonBriefly", travel);
-		return list;
-	}
+
 	// [to person_detail] all
 	public Person getPersonDetail(Person person) {
 		return this.sqlSessionTemplate.selectOne("person.getPersonDetail", person);

@@ -14,8 +14,8 @@
 <update id="update" parameterType="person">  
 	<![CDATA[  
 	update personDB set  
-	PersonName = #{PersonName},  
-	Account = #{Account}
+	Difference = #{Difference},  
+	Role = #{Role}
 	where  
 	Person_id = #{PersonId}  
 	]]>  
@@ -32,7 +32,7 @@
 	]]>
 </select>
 
-<select id="getPersonBriefly" parameterType="travel" resultType="person">
+<select id="getPersonBriefly" parameterType="String" resultType="person">
 	<![CDATA[
 		select
 		PersonName,
@@ -41,7 +41,7 @@
 		from
 		personDB
 		where
-		travelName = #{travelName}
+		travel = #{travel}
 	]]>
 </select>
 

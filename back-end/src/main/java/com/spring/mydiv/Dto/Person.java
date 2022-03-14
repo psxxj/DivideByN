@@ -89,7 +89,7 @@ public class Person {
 		return Difference;
 	}
 
-	public void setDifference(int difference) {
+	public void setDifference(double difference) {
 		Difference = difference;
 	}
 
