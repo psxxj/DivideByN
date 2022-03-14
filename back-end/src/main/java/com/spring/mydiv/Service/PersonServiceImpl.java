@@ -71,7 +71,23 @@ public class PersonServiceImpl implements PersonService {
 	}
 	
 	public String PrintOrder(Person person) {
-		
-	}
+		if (person.getRole() == "LEADER") {
+			List<Person> getter = this.personDao.getGETTER(person);
+			for (Person p : getter) {
+				String message = String.join("Send ", Double.toString(p.getDifference()),"won to ", p.getPersonName());
+				System.out.print(message);
+			}
+		} else if (person.getRole() == "SENDER") {
+			String leaderName = this.personDao.getLEADER(person);
+			String message = String.join("Send ", Double.toString(person.getDifference()),"won to the LEADER, ", leaderName);
+			System.out.print(message);
+		} else {
+			String leaderName = this.personDao.getLEADER(person);
+			String message = String.join("Get ", Double.toString(person.getDifference()),"won from the LEADER, ", leaderName);
+			System.out.print(message);
+		}
+	}	
+	
+	
 
 }

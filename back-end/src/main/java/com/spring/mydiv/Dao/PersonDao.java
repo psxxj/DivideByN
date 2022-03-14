@@ -52,4 +52,17 @@ public class PersonDao {
 	}
 	
 	
+	
+	
+	
+	public List<Person> getGETTER(Person person){
+		return this.sqlSessionTemplate.selectList("person.getGETTER", person);
+	}
+	public List<Person> getSENDER(Person person){
+		return this.sqlSessionTemplate.selectList("person.getSENDER", person);
+	}
+	public String getLEADER(Person person){
+		return this.sqlSessionTemplate.selectOne("person.getLEADER", person);
+	}	
+	
 }

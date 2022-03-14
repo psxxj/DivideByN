@@ -61,4 +61,40 @@
 
 
 
+<select id="getGETTER" parameterType="person" resultType="person">
+	<![CDATA[
+		select
+		PersonName,
+		Difference
+		from
+		personDB
+		where
+		travelName = #{travelName}
+		Role = #{"GETTER"}
+	]]>
+</select>
+<select id="getSENDER" parameterType="person" resultType="person">
+	<![CDATA[
+		select
+		PersonName,
+		Difference
+		from
+		personDB
+		where
+		travelName = #{travelName}
+		Role = #{"SENDER"}
+	]]>
+</select>
+<select id="getLEADER" parameterType="person" resultType="String">
+	<![CDATA[
+		select
+		PersonName,
+		from
+		personDB
+		where
+		travelName = #{travelName}
+		Role = #{"LEADER"}
+	]]>
+</select>
+
 </mapper>	
