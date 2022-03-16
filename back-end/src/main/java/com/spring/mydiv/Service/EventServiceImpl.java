@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spring.mydiv.Dao.EventDao;
+import com.spring.mydiv.Dao.PersonDao;
 import com.spring.mydiv.Dto.Event;
 import com.spring.mydiv.Dto.Person;
 import com.spring.mydiv.Dto.Travel;
@@ -12,6 +13,8 @@ import com.spring.mydiv.Dto.Travel;
 public class EventServiceImpl implements EventService {
 	@Autowired
 	private EventDao eventDao;
+	@Autowired
+	private PersonDao personDao;
 	
 	@Autowired
 	private PersonService personService;
@@ -48,4 +51,10 @@ public class EventServiceImpl implements EventService {
 	public Event ShowEvent(Event event) {
 		return this.eventDao.getEventDetail(event);
 	}
+	
+	//----------for create----------//
+	public List<String> ShowWhoInTravel(Event event){
+		return this.personDao.getWhoInTravelName(event);
+	}
+	
 }

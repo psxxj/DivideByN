@@ -61,14 +61,9 @@ public class PersonDao {
 		return this.sqlSessionTemplate.selectOne("person.getLEADER", person);
 	}	
 	
-	
-	
-	
-	
-	
-	
-	public List<String> getWhoInTravelName(String TravelName){
-		List<String> list =  this.sqlSessionTemplate.selectList("person.getWhoInTravelName", TravelName);
+	//----------for create----------//
+	public List<String> getWhoInTravelName(Event event){
+		List<String> list =  this.sqlSessionTemplate.selectList("person.getWhoInTravelName", event);
 		return list;
 	}
 	

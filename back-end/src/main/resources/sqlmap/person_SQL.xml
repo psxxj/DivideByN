@@ -105,15 +105,7 @@
 	]]>
 </select>
 
-
-
-
-
-
-  
-
-
-<select id="getWhoInTravelName" parameterType="travel" resultType="String">
+<select id="getWhoInTravelName" parameterType="event" resultType="String">
 	<![CDATA[
 		select PersonName
 		from
