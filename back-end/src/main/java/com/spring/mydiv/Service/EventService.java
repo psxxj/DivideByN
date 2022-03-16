@@ -1,9 +1,13 @@
 package com.spring.mydiv.Service;
 
+import java.util.List;
+
 import com.spring.mydiv.Dto.Event;
 
 public interface EventService {
 
-	String CreateEvent(Event event);
-	String Print(Event event);
+	long getTravelPeriod(Event event);
+
+	long getEventNum(Event event);
+
 }

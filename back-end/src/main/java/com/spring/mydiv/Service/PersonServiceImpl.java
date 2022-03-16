@@ -1,5 +1,7 @@
 package com.spring.mydiv.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,35 +11,81 @@ import com.spring.mydiv.Dto.Person;
 
 @Service
 public class PersonServiceImpl implements PersonService {
+	
 	@Autowired
 	private PersonDao personDao;
-		
+	
+	//----------create----------//
 	@Override
-	public String CreatePerson(Person person) {
-		personDao.insert(person);
-		
-		return "Service --> DAO : Success";
+	public List<Person> CreatePerson(Person person) {
+		int affectRowCount = this.personDao.insert(person);
+	    if (affectRowCount ==  1) { // 1 = success
+	    	String travelName = person.getTravelName();
+	    	return this.personDao.getPersonBriefly(travelName);
+	    }
+	    return null;
 	}
 	
+	// at EventService_CreateEvent
 	@Override
-	public void UpdatePerson(Person person) {
-		personDao.update(person);
+	public boolean get_difference(Event event, Person person) {
+		if (person.getPersonName() == event.getPayer().getPersonName()){
+			person.setSumGet(person.getSumGet()+event.getGetPrice());			
+		} else {
+			person.setSumSend(person.getSumSend()+event.getDividePrice());
+		}
+		person.setDifference(person.getSumGet() - person.getSumSend());
+		int affectRowCount = this.personDao.updateMoney(person);
+		return affectRowCount == 1;
 	}
 	
+	// at TravelService_SetRole
 	@Override
-	public void get_difference(Person person) {
-		get_sumSend(person);
-		get_sumGet(person);
-		person.setDifference((int)(person.getSumGet() - person.getSumSend()));
-		UpdatePerson(person);
+	public boolean UpdateRole(Person person) {
+		int affectRowCount = this.personDao.updateRole(person);
+		return affectRowCount == 1;
+	}
+	
+	//----------detail----------//
+	public Person ShowPerson(Person person) {
+		return this.personDao.getPersonDetail(person);
 	}
 
+	public List<Event> ShowWhatEventIn(Person person) {
+		return this.personDao.getWhatEventIn(person);
+	}
+	
+	public void PrintOrder(Person person) {
+		if (person.getRole() == "LEADER") {
+			List<Person> getter = this.personDao.getGETTER(person);
+			for (Person p : getter) {
+				String message = String.join("Send ", Double.toString(p.getDifference()),"won to ", p.getPersonName());
+				System.out.print(message);
+			}
+		} else if (person.getRole() == "SENDER") {
+			String leaderName = this.personDao.getLEADER(person);
+			String message = String.join("Send ", Double.toString(person.getDifference()),"won to the LEADER, ", leaderName);
+			System.out.print(message);
+		} else {
+			String leaderName = this.personDao.getLEADER(person);
+			String message = String.join("Get ", Double.toString(person.getDifference()),"won from the LEADER, ", leaderName);
+			System.out.print(message);
+		}
+	}		
+	
+	
+	
+	
+	
+	
+	
+	
 	public void get_sumSend(Person person) {
 		person.setSumSend(0);
 		for(Event event : person.getWillSend()) {
 			person.setSumSend( person.getSumSend() + event.getDividePrice() );
 		}
-		UpdatePerson(person);
+		UpdateRole(person);
 	}
 	
 	public void get_sumGet(Person person) {
@@ -45,8 +93,15 @@ public class PersonServiceImpl implements PersonService {
 		for(Event event : person.getWillGet()) {
 			person.setSumGet(person.getSumGet() + event.getPrice());
 		}
-		UpdatePerson(person);
+		UpdateRole(person);
 	}
 	
-	// not yet print
+
+	
+
+
+
+	
+	
+
 }

@@ -4,19 +4,27 @@ import java.util.ArrayList;
 
 public class Person {
 	
-	private String PersonName;
-	private String Account;
+	private String PersonName; //in personDB
+	private String Account; //in personDB
+	private String TravelName; //in personDB
+	private double sumSend;
+	private double sumGet;
+	private double Difference;	
+	
+	
 	private ArrayList<Person> getterALL = new ArrayList<>();
 	private ArrayList<Event> willSend = new ArrayList<>();
 	private ArrayList<Event> willGet = new ArrayList<>();
 	private String Role;
-	private double sumSend;
-	private double sumGet;
-	private int Difference;
+
+
+	//----------------//
 	
-	public Person(String PersonName, String Account){
-		this.setPersonName(PersonName);
-		this.setAccount(Account);
+	
+	public Person(String personName, String account, String travelName){
+		this.setPersonName(personName);
+		this.setAccount(account);
+		this.setTravelName(travelName);
 	}
 
 	public String getPersonName() {
@@ -24,7 +32,7 @@ public class Person {
 	}
 
 	public void setPersonName(String personName) {
-		PersonName = personName;
+		this.PersonName = personName;
 	}
 
 	public String getAccount() {
@@ -32,9 +40,46 @@ public class Person {
 	}
 
 	public void setAccount(String account) {
-		Account = account;
+		this.Account = account;
 	}
 
+	public String getTravelName() {
+		return TravelName;
+	}
+
+	public void setTravelName(String travelName) {
+		this.TravelName = travelName;
+	}
+	
+	public double getSumSend() {
+		return sumSend;
+	}
+
+	public void setSumSend(double sumSend) {
+		this.sumSend = sumSend;
+	}
+
+	public double getSumGet() {
+		return sumGet;
+	}
+
+	public void setSumGet(double sumGet) {
+		this.sumGet = sumGet;
+	}
+
+	public double getDifference() {
+		return Difference;
+	}
+
+	public void setDifference(double difference) {
+		this.Difference = difference;
+	}
+	
+	
+	
+	
+	
+	
 	public String getRole() {
 		return Role;
 	}
@@ -67,29 +112,7 @@ public class Person {
 		this.willGet = willGet;
 	}
 
-	public double getSumSend() {
-		return sumSend;
-	}
 
-	public void setSumSend(double sumSend) {
-		this.sumSend = sumSend;
-	}
 
-	public double getSumGet() {
-		return sumGet;
-	}
-
-	public void setSumGet(double sumGet) {
-		this.sumGet = sumGet;
-	}
-
-	public int getDifference() {
-		return Difference;
-	}
-
-	public void setDifference(int difference) {
-		Difference = difference;
-	}
-	
 }
 	

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="travel">
+
+<insert id="insertName" parameterType="travel" useGeneratedKeys="true" keyProperty="Travel_id">  
+    <![CDATA[
+    insert into travelDB
+    TravelName
+    values
+    #{TravelName}
+    ]]>
+</insert>
+
+
+
+
+
+<update id="update" parameterType="travel">  
+	<![CDATA[  
+	update travelDB set  
+	TravelName = #{TravelName}  
+	where
+	Travel_id = #{Travel_id}  
+	]]>  
+</update>  
+
+<select id="select" parameterType="travel" resultType="travel">
+	<![CDATA[
+		select
+		TravelName,
+		TravelDate
+		from
+		travelDB
+		where
+		Travel_id = #{Travel_id}
+	]]>
+</select>
+
+</mapper>

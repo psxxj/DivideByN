@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="person">
+
+<insert id="insert" parameterType="person" useGeneratedKeys="true" keyProperty="Person_id">  
+    <![CDATA[
+    insert into personDB
+    (PersonName, Account, TravelName) 
+    values
+    (#{PersonName}, #{Account}, #{TravelName})
+    ]]>
+</insert>
+
+<select id="getPersonBriefly" parameterType="String" resultType="person">
+	<![CDATA[
+		select *
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<update id="updateMoney" parameterType="person">  
+	<![CDATA[
+	update personDB set
+	sumSend = #{sumSend},
+	sumGet = #{sumGet},
+	Difference = #{Difference},
+	where  
+	Person_id = #{Person_id}  
+	]]>  
+</update>
+
+<select id="getWhoInTravelAll" parameterType="travel" resultType="person">
+	<![CDATA[
+		select *
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<update id="updateRole" parameterType="person">  
+	<![CDATA[
+	update personDB set
+	Role = #{Role}
+	where  
+	Person_id = #{Person_id}  
+	]]>  
+</update>  
+
+
+<select id="getPersonDetail" parameterType="person" resultType="person">
+	<![CDATA[
+		select
+		PersonName,
+		Account,
+		Role,
+		Difference
+		from
+		personDB
+		where
+		Person_id = #{Person_id},
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<select id="getGETTER" parameterType="person" resultType="person">
+	<![CDATA[
+		select
+		PersonName,
+		Difference
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+		Role = #{"GETTER"}
+	]]>
+</select>
+
+<select id="getSENDER" parameterType="person" resultType="person">
+	<![CDATA[
+		select
+		PersonName,
+		Difference
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+		Role = #{"SENDER"}
+	]]>
+</select>
+
+<select id="getLEADER" parameterType="person" resultType="String">
+	<![CDATA[
+		select
+		PersonName,
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+		Role = #{"LEADER"}
+	]]>
+</select>
+
+<select id="getWhoInTravelName" parameterType="event" resultType="String">
+	<![CDATA[
+		select PersonName
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+
+
+
+
+
+
+
+
+
+
+<update id="update" parameterType="person">  
+	<![CDATA[  
+	update personDB set  
+	Difference = #{Difference},  
+	Role = #{Role}
+	where  
+	Person_id = #{PersonId}  
+	]]>  
+</update>  
+
+
+
+
+
+
+
+
+
+
+
+</mapper>	
