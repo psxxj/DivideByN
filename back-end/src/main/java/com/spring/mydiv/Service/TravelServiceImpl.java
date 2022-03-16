@@ -1,14 +1,16 @@
 package com.spring.mydiv.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mydiv.Dao.EventDao;
+import com.spring.mydiv.Dao.PersonDao;
 import com.spring.mydiv.Dao.TravelDao;
 import com.spring.mydiv.Dto.Event;
 import com.spring.mydiv.Dto.Person;
 import com.spring.mydiv.Dto.Travel;
-
 
 @Service
 public class TravelServiceImpl implements TravelService {
@@ -16,54 +18,34 @@ public class TravelServiceImpl implements TravelService {
 	@Autowired
 	private TravelDao travelDao;
 	@Autowired
+	private PersonDao personDao;
+	@Autowired
 	private PersonService personService;
 	
-	@Override //->
+	//----------create----------//
+	@Override
 	public String CreateTravel(Travel travel) {
-		int affectRowCount = this.travelDao.insert(travel);
+		int affectRowCount = this.travelDao.insertName(travel);
 	    if (affectRowCount ==  1) { // 1 = success
-	    	return travel.getTravelName(); //<-
+	    	return travel.getTravelName();
 	    }
 	    return null;
 	}
-
 	
-
-	
-
-	
-	
-	
-	@Override //<-
-	public void getPerson(Person person) {
-		Travel travel = travelDao.select(1);
-		travel.getPersonALL().add(person);
-		travelDao.update(travel);
-		
-	}
-	
+	// at EventService_CreateEvent
 	@Override
-	public void getEvent(Event event) {
-		Travel travel = travelDao.select(1);
-		travel.getEventALL().add(event);
-		travelDao.update(travel);
-		
-	}
-	
-	@Override
-	public void setRole() {
-		Travel travel = travelDao.select(1);
+	public void SetRole(String travelName) {
 		double max_difference = 0;
-		Person Leader = travel.getLeader();
-		Leader = null;
+		Person Leader = null;
 		
-		for(Person person : travel.getPersonALL()) {
+		List<Person> personALL = this.personDao.getWhoInTravelAll(travelName);
+		for(Person person : personALL) {
 			if(person.getDifference() < 0) {
 				person.setRole("SENDER");
 			}
 			else {
 				person.setRole("GETTER");
-				if (max_difference < Math.abs(person.getDifference())) {
+				if (max_difference < person.getDifference()) {
 					Leader = person;
 					max_difference = person.getDifference();
 				}
@@ -71,10 +53,15 @@ public class TravelServiceImpl implements TravelService {
 		}
 		Leader.setRole("LEADER");
 		
-		for(Person person : travel.getPersonALL()) {
-			personService.UpdatePerson(person);
+		for(Person person : personALL) {
+			this.personService.UpdateRole(person);
 		}
-		
 	}
+
+	//----------detail----------//
+
+	
+	
+
 	
 }

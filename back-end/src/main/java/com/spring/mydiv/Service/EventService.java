@@ -5,6 +5,9 @@ import java.util.List;
 import com.spring.mydiv.Dto.Event;
 
 public interface EventService {
-	List<Event> CreateEvent(Event event);
+
+	long getTravelPeriod(Event event);
+
+	long getEventNum(Event event);
 
 }

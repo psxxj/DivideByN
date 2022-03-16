@@ -11,39 +11,46 @@
     ]]>
 </insert>
 
-<update id="update" parameterType="person">  
-	<![CDATA[  
-	update personDB set  
-	Difference = #{Difference},  
+<select id="getPersonBriefly" parameterType="String" resultType="person">
+	<![CDATA[
+		select *
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<update id="updateMoney" parameterType="person">  
+	<![CDATA[
+	update personDB set
+	sumSend = #{sumSend},
+	sumGet = #{sumGet},
+	Difference = #{Difference},
+	where  
+	Person_id = #{Person_id}  
+	]]>  
+</update>
+
+<select id="getWhoInTravelAll" parameterType="travel" resultType="person">
+	<![CDATA[
+		select *
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<update id="updateRole" parameterType="person">  
+	<![CDATA[
+	update personDB set
 	Role = #{Role}
 	where  
-	Person_id = #{PersonId}  
+	Person_id = #{Person_id}  
 	]]>  
 </update>  
 
-<select id="getWhoInTravel" parameterType="travel" resultType="String">
-	<![CDATA[
-		select
-		PersonName
-		from
-		personDB
-		where
-		travelName = #{travelName}
-	]]>
-</select>
-
-<select id="getPersonBriefly" parameterType="String" resultType="person">
-	<![CDATA[
-		select
-		PersonName,
-		Role,
-		Difference
-		from
-		personDB
-		where
-		travel = #{travel}
-	]]>
-</select>
 
 <select id="getPersonDetail" parameterType="person" resultType="person">
 	<![CDATA[
@@ -55,11 +62,10 @@
 		from
 		personDB
 		where
-		Person_id = #{Person_id}
+		Person_id = #{Person_id},
+		TravelName = #{TravelName}
 	]]>
 </select>
-
-
 
 <select id="getGETTER" parameterType="person" resultType="person">
 	<![CDATA[
@@ -69,10 +75,11 @@
 		from
 		personDB
 		where
-		travelName = #{travelName}
+		TravelName = #{TravelName}
 		Role = #{"GETTER"}
 	]]>
 </select>
+
 <select id="getSENDER" parameterType="person" resultType="person">
 	<![CDATA[
 		select
@@ -81,10 +88,11 @@
 		from
 		personDB
 		where
-		travelName = #{travelName}
+		TravelName = #{TravelName}
 		Role = #{"SENDER"}
 	]]>
 </select>
+
 <select id="getLEADER" parameterType="person" resultType="String">
 	<![CDATA[
 		select
@@ -92,9 +100,57 @@
 		from
 		personDB
 		where
-		travelName = #{travelName}
+		TravelName = #{TravelName}
 		Role = #{"LEADER"}
 	]]>
 </select>
+
+
+
+
+
+
+  
+
+
+<select id="getWhoInTravelName" parameterType="travel" resultType="String">
+	<![CDATA[
+		select PersonName
+		from
+		personDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+
+
+
+
+
+
+
+
+
+
+<update id="update" parameterType="person">  
+	<![CDATA[  
+	update personDB set  
+	Difference = #{Difference},  
+	Role = #{Role}
+	where  
+	Person_id = #{PersonId}  
+	]]>  
+</update>  
+
+
+
+
+
+
+
+
+
+
 
 </mapper>	

@@ -12,9 +12,13 @@ public class TravelDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public int insert(Travel travel) {
-		return this.sqlSessionTemplate.insert("travel.insert", travel);
+	//----------create----------//
+	public int insertName(Travel travel) {
+		return this.sqlSessionTemplate.insert("travel.insertName", travel);
 	}
+	
+	//----------detail----------//
+	
 	
 	
 	

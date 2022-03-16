@@ -5,68 +5,11 @@
 <insert id="insert" parameterType="event" useGeneratedKeys="true" keyProperty="Event_id">  
     <![CDATA[
     insert into eventDB
-    (EventName, Participant2String, Payer, EventDate, Price, TravelName) 
+    (EventName, Participant2String, Payer, EventDate, Price, TravelName, DividePrice, GetPrice) 
     values
-    (#{EventName}, #{Participant2String}, #{Payer}, #{EventDate}, #{Price}, #{TravelName})
+    (#{EventName}, #{Participant2String}, #{Payer}, #{EventDate}, #{Price}, #{TravelName}, #{DividePrice}, #{GetPrice})
     ]]>
 </insert>
-
-
-<select id="getEventBriefly" parameterType="String" resultType="event">
-	<![CDATA[
-		select
-		EventName,
-		Payer,
-		Price,
-		Date
-		from
-		eventDB
-		where
-		TravelName = #{travelName}
-	]]>
-</select>
-
-<select id="getEventDetail" parameterType="event" resultType="event">
-	<![CDATA[
-		select
-		EventName,
-		Payer,
-		Price,
-		Participant,
-		EventDate
-		from
-		eventDB
-		where
-		Event_id = #{Event_id}
-	]]>
-</select>
-
-<select id="getWhatEventIn" parameterType="person" resultType="event">
-	<![CDATA[
-		select
-		EventName,
-		EventDate,
-		Price,
-		Payer,
-		Participant
-		from
-		eventDB
-		where
-		participant LIKE
-		concat('%', #{PersonName}, '%')
-	]]>
-</select>
-
-<select id="getEventNum" parameterType="String" resultType="int">
-	<![CDATA[
-		select
-		count(*)
-		from
-		eventDB
-		where
-		TravelName = #{travelName}
-	]]>
-</select>
 
 <select id="getOldest" parameterType="String" resultType="Date">
 	<![CDATA[
@@ -75,7 +18,7 @@
 		from
 		eventDB
 		where
-		TravelName = #{travel}
+		TravelName = #{TravelName}
 		order by
 		EventDate ASC
 		limit 1
@@ -89,12 +32,55 @@
 		from
 		eventDB
 		where
-		TravelName = #{travel}
+		TravelName = #{TravelName}
 		order by
 		EventDate DESC
 		limit 1
 	]]>
 </select>
 
+<select id="getEventBriefly" parameterType="String" resultType="event">
+	<![CDATA[
+		select *
+		from
+		eventDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+<select id="getEventNum" parameterType="String" resultType="int">
+	<![CDATA[
+		select
+		count(*)
+		from
+		eventDB
+		where
+		TravelName = #{TravelName}
+	]]>
+</select>
+
+
+<select id="getWhatEventIn" parameterType="person" resultType="event">
+	<![CDATA[
+		select *
+		from
+		eventDB
+		where
+		participant LIKE
+		concat('%', #{PersonName}, '%')
+	]]>
+</select>
+
+
+<select id="getEventDetail" parameterType="event" resultType="event">
+	<![CDATA[
+		select *
+		from
+		eventDB
+		where
+		EventName = #{EventName}
+	]]>
+</select>
 
 </mapper>	
