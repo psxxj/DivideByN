@@ -8,7 +8,8 @@ public class DivideApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DivideApplication.class, args);
-		System.out.print("fin");
+		System.out.print("Success");
+		// 220330
 	}
 
 }
