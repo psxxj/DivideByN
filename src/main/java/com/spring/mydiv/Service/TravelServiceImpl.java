@@ -1,31 +1,23 @@
 package com.spring.mydiv.Service;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.mydiv.Dao.TravelDao;
 import com.spring.mydiv.Dto.Travel;
+import com.spring.mydiv.Mapper.TravelMapper;
 
 @Service
-public class TravelServiceImpl implements TravelService {
-
+public class TravelServiceImpl implements TravelService{
 	@Autowired
-	private TravelDao travelDao;
+	TravelMapper travelMapper;
 	
-	//----------create----------//
-	@Override
-	public String CreateTravel(Map<String, Object> map) {
-		int affectRowCount = this.travelDao.insertName(map);
+	//@Override
+	public String CreateTravel(Travel travel) {
+		int affectRowCount = this.travelMapper.insertTravelName(travel);
 	    if (affectRowCount ==  1) { // 1 = success
-	    	return map.get("Travel_id").toString();
+	    	return travel.getTravelName();
 	    }
 	    return null;
 	}
 	
-	@Override
-	public Map<String, Object> detail(Map<String, Object> map){
-	    return this.travelDao.select(map);
-	}
 }
