@@ -7,10 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter 
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Travel {
-	private int Travel_id;
-	@Setter @NonNull
+	
+	@NonNull
 	private String TravelName;
+	
+	private int Travel_id;
 }

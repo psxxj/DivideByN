@@ -71,6 +71,7 @@
 		]]>
 	</select>
 
+
 	<select id="getWhatEventIn" parameterType="person" resultType="event">
 		<![CDATA[
 			select *

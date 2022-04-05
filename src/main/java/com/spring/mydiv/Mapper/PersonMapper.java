@@ -29,12 +29,12 @@ public interface PersonMapper {
 	//----------at eventService-//
 	public int updatePersonMoney(Person person);
 	
-	public List<Person> getWhoInTravelAll(String TravelName);
-	
 	public int updatePersonRole(Person person);
 	
 	public List<String> getWhoInTravelName(String TravelName);
 
-	
+	//----------at travelService//
+	public List<Person> getWhoInTravelAll(String TravelName);
+
 
 }

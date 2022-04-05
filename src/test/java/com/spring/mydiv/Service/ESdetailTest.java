@@ -25,7 +25,7 @@ class ESdetailTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-
+/*
 	@Test
     @Commit
     @DisplayName("ShowPerson") // 얘 수정할 차례
@@ -68,7 +68,7 @@ class ESdetailTest {
 		}
 		//fail("Not yet implemented"); // TODO
 	}
-
+*/
 	@Test
     @Commit
     @DisplayName("PrintOrder") // 얘 수정할 차례
@@ -76,9 +76,9 @@ class ESdetailTest {
 		System.out.println("=======PrintOrder=======");
 		
 		String travelName = "divide";
-		Person person_ = this.personMapper.getPersonBriefly(travelName).get(1);
+		Person person_ = this.personMapper.getPersonBriefly(travelName).get(2);
 		// controller에서 person 정보 받아오는 부분 대체
-		
+		// System.out.println(person_.getRole());
 		this.personService.PrintOrder(person_);
 		//fail("Not yet implemented"); // TODO
 	}

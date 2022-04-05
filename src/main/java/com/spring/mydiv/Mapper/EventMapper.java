@@ -12,12 +12,9 @@ import com.spring.mydiv.Dto.Person;
 public interface EventMapper {
 	
 	public int insertEventInfo(Event event);
-	
 	public List<Event> getEventBriefly(String TravelName);
-	
 	public Date getLatest(String TravelName);
 	public Date getOldest(String TravelName);
-	
 	public int getEventNum(String TravelName);
 	
 	//----------detail----------//

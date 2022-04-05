@@ -24,8 +24,6 @@
 		]]>
 	</select>
 	
-	
-	
 	<update id="updatePersonMoney" parameterType="person">  
 		<![CDATA[
 		update personDB set
@@ -105,7 +103,7 @@
 	<select id="getLEADER" parameterType="person" resultType="String">
 		<![CDATA[
 			select
-			PersonName,
+			PersonName
 			from
 			personDB
 			where

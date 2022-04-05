@@ -19,7 +19,7 @@ public class TravelServiceImpl implements TravelService{
 	@Autowired
 	EventMapper eventMapper;
 	
-	//@Override
+	@Override
 	public String CreateTravel(Travel travel) {
 		int affectRowCount = this.travelMapper.insertTravelName(travel);
 	    if (affectRowCount ==  1) { // 1 = success
@@ -28,9 +28,9 @@ public class TravelServiceImpl implements TravelService{
 	    return null;
 	}
 	
-	//@Override
+	@Override
 	public String getTravelPeriod(Event event) {
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		
 		String travelName = event.getTravelName();
 		Date format1 = this.eventMapper.getLatest(travelName);

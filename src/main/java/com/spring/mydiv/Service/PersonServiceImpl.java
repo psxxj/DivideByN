@@ -18,8 +18,8 @@ public class PersonServiceImpl implements PersonService{
 	EventMapper eventMapper;
 	
 	//----------create----------//
-	//@Override
-	public List<Person> CreatePerson(Person person) { //fin
+	@Override
+	public List<Person> CreatePerson(Person person) {
 		int affectRowCount = this.personMapper.insertPersonInfo(person);
 	    if (affectRowCount ==  1) { // 1 = success
 	    	String travelName = person.getTravelName();
@@ -29,29 +29,32 @@ public class PersonServiceImpl implements PersonService{
 	}
 	
 	//----------detail----------//
+	@Override
 	public Person ShowPerson(Person person) {
 		return this.personMapper.getPersonDetail(person);
 	}
 
+	@Override
 	public List<Event> ShowWhatEventIn(Person person) {
 		return this.eventMapper.getWhatEventIn(person);
 	}
 	
+	@Override
 	public void PrintOrder(Person person) {
-		if (person.getRole() == "LEADER") {
+		if (person.getRole().contains("LEADER")) {
 			List<Person> getter = this.personMapper.getGETTER(person);
 			for (Person p : getter) {
-				String message = String.join("Send ", Double.toString(p.getDifference()),"won to ", p.getPersonName());
-				System.out.print(message);
+				String message = "Send " + Double.toString(p.getDifference()) + " won to " + p.getPersonName();
+				System.out.println(message);
 			}
-		} else if (person.getRole() == "SENDER") {
+		} else if (person.getRole().contains("SENDER")) {
 			String leaderName = this.personMapper.getLEADER(person);
-			String message = String.join("Send ", Double.toString(person.getDifference()),"won to the LEADER, ", leaderName);
-			System.out.print(message);
+			String message = "Send " + Double.toString(person.getDifference()*(-1)) + "won to the LEADER = " + leaderName;
+			System.out.println(message);
 		} else {
 			String leaderName = this.personMapper.getLEADER(person);
-			String message = String.join("Get ", Double.toString(person.getDifference()),"won from the LEADER, ", leaderName);
-			System.out.print(message);
+			String message = "Get " + Double.toString(person.getDifference()) + " won from the LEADER = " + leaderName;
+			System.out.println(message);
 		}
 	}
 	

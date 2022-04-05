@@ -15,39 +15,41 @@ public class EventServiceImpl implements EventService{
 	@Autowired
 	PersonMapper personMapper;
 	
+	@Override
 	public List<Event> CreateEvent(Event event) {
-		// event.SetInfo();
-		//System.out.println("setinfo success");
+		
 		int affectRowCount = this.eventMapper.insertEventInfo(event);
-		//System.out.println("insert event success");
 		if (affectRowCount ==  1) { // 1 = success
+			
 	    	for(Person parti : event.getParticipant()) {
 	    		get_difference(event, parti);
-	    		//System.out.println("get diff success");
 	    	}
+	    	
 	    	String TravelName = event.getTravelName();
 	    	SetRole(TravelName);
-	    	//System.out.println("setrole success");
+	    	
 	    	return this.eventMapper.getEventBriefly(TravelName);
 	    }
 	    return null;
 	}
 	
+	@Override
 	public boolean get_difference(Event event, Person person) {
+		
 		if (person.getPersonName() == event.getPayer().getPersonName()){
-			//System.out.println(person.getPersonName());
 			person.setSumGet(person.getSumGet()+event.getGetPrice());			
 		} else {
 			person.setSumSend(person.getSumSend()+event.getDividePrice());
 		}
+		
 		person.setDifference(person.getSumGet() - person.getSumSend());
-		//System.out.println(person.getDifference());
-		//System.out.println(person.getPerson_id());
 		int affectRowCount = this.personMapper.updatePersonMoney(person);
 		return affectRowCount == 1;
 	}
 	
+	@Override
 	public void SetRole(String travelName) {
+		
 		double max_difference = 0;
 		Person Leader = null;
 		
@@ -73,22 +75,26 @@ public class EventServiceImpl implements EventService{
 		}	
 	}
 
+	@Override
 	public boolean UpdateRole(Person person) {
 		int affectRowCount = this.personMapper.updatePersonRole(person);
 		return affectRowCount == 1;
 	}
 	
+	@Override
 	public long getEventNum(Event event) {
 		String travelName = event.getTravelName();
 		return this.eventMapper.getEventNum(travelName);
 	}
 	
 	//----------detail----------//
+	@Override
 	public Event ShowEvent(Event event) {
 		return this.eventMapper.getEventDetail(event);
 	}
 	
 	//----------for create----------//
+	@Override
 	public List<String> ShowWhoInTravel(String TravelName){
 		return this.personMapper.getWhoInTravelName(TravelName);
 	}
