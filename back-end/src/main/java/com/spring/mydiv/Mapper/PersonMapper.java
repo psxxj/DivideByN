@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.spring.mydiv.Dto.Event;
 import com.spring.mydiv.Dto.Person;
 
 @Mapper
@@ -18,11 +19,22 @@ public interface PersonMapper {
 	//----------detail----------//
 	public Person getPersonDetail(Person person);
 	
+	public List<Person> getGETTER(Person person);
+	
+	public List<Person> getSENDER(Person person);
+	
+	public String getLEADER(Person person);
+	
+	
 	//----------at eventService-//
 	public int updatePersonMoney(Person person);
 	
 	public List<Person> getWhoInTravelAll(String TravelName);
 	
 	public int updatePersonRole(Person person);
+	
+	public List<String> getWhoInTravelName(String TravelName);
+
+	
 
 }

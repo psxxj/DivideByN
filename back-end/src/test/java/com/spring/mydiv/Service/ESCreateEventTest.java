@@ -40,8 +40,8 @@ class ESCreateEventTest {
 		List<Person> personALL = this.personMapper.getWhoInTravelAll("divide");
 		ArrayList<Person> plist = new ArrayList<Person>(personALL);
 		Date date = new Date();
-		int price = 20000;
-		Event event = new Event("taxi", plist, plist.get(0), "divide", price, date);
+		int price = 50000;
+		Event event = new Event("lunch", plist, plist.get(1), "divide", price, date);
 		List<Event> list = eventService.CreateEvent(event);
 		System.out.println("Create success");
 		for(Event e :list) {

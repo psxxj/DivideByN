@@ -3,12 +3,14 @@ package com.spring.mydiv.Dto;
 import java.util.ArrayList;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @RequiredArgsConstructor
 public class Person {
 	@NonNull

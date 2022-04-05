@@ -78,9 +78,19 @@ public class EventServiceImpl implements EventService{
 		return affectRowCount == 1;
 	}
 	
+	public long getEventNum(Event event) {
+		String travelName = event.getTravelName();
+		return this.eventMapper.getEventNum(travelName);
+	}
 	
-	//public long getEventNum(Event event)
+	//----------detail----------//
+	public Event ShowEvent(Event event) {
+		return this.eventMapper.getEventDetail(event);
+	}
 	
-	//public List<String> ShowWhoInTravel(Event event)	
+	//----------for create----------//
+	public List<String> ShowWhoInTravel(String TravelName){
+		return this.personMapper.getWhoInTravelName(TravelName);
+	}
 	
 }

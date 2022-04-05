@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Event {
 
 	@NonNull
@@ -28,18 +30,9 @@ public class Event {
 	
 	private int Event_id;
 	private String Participant2String; //in eventDB
-	private String PayerName;// = Payer.getPersonName();
-	private double DividePrice;// = (double)this.Price / this.Participant.size();
-	private double GetPrice;// = this.DividePrice * (this.Participant.size()-1);
-	
-	public void SetInfo() {
-		this.setPayerName(Payer.getPersonName());
-		this.setDividePrice((double)this.Price / this.Participant.size());
-		this.setGetPrice(this.DividePrice * (this.Participant.size()-1));
-		for(Person parti : Participant) {
-			this.Participant2String += parti.getPersonName() + " " ;
-		}
-	}
+	private String PayerName;
+	private double DividePrice;
+	private double GetPrice;
 	
 	public Event(String EventName, ArrayList<Person> Participant,
 			Person Payer, String TravelName, int Price, Date EventDate) {
