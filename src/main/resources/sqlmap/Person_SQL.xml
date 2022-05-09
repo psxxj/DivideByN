@@ -7,7 +7,7 @@
 
 	<insert id="insertPersonInfo" parameterType="person" useGeneratedKeys="true" keyProperty="Person_id">  
 	    <![CDATA[
-	    insert into personDB
+	    insert into persondb
 	    (PersonName, Account, TravelName) 
 	    values
 	    (#{PersonName}, #{Account}, #{TravelName})
@@ -18,7 +18,7 @@
 		<![CDATA[
 			select *
 			from
-			personDB
+			persondb
 			where
 			TravelName = #{TravelName}
 		]]>
@@ -26,7 +26,7 @@
 	
 	<update id="updatePersonMoney" parameterType="person">  
 		<![CDATA[
-		update personDB set
+		update persondb set
 		sumSend = #{sumSend},
 		sumGet = #{sumGet},
 		Difference = #{Difference}
@@ -38,7 +38,7 @@
 		<![CDATA[
 			select *
 			from
-			personDB
+			persondb
 			where
 			TravelName = #{TravelName}
 		]]>
@@ -46,7 +46,7 @@
 	
 	<update id="updatePersonRole" parameterType="person">  
 		<![CDATA[
-		update personDB set
+		update persondb set
 		Role = #{Role}
 		where  
 		Person_id = #{Person_id}  
@@ -57,7 +57,7 @@
 		<![CDATA[
 			select PersonName
 			from
-			personDB
+			persondb
 			where
 			TravelName = #{TravelName}
 		]]>
@@ -67,7 +67,7 @@
 		<![CDATA[
 			select *
 			from
-			personDB
+			persondb
 			where
 			Person_id = #{Person_id} AND
 			TravelName = #{TravelName}
@@ -80,7 +80,7 @@
 			PersonName,
 			Difference
 			from
-			personDB
+			persondb
 			where
 			TravelName = #{TravelName} AND
 			Role = 'GETTER'
@@ -93,7 +93,7 @@
 			PersonName,
 			Difference
 			from
-			personDB
+			persondb
 			where
 			TravelName = #{TravelName} AND
 			Role = 'SENDER'
@@ -105,7 +105,7 @@
 			select
 			PersonName
 			from
-			personDB
+			persondb
 			where
 			TravelName = #{TravelName} AND
 			Role = 'LEADER'

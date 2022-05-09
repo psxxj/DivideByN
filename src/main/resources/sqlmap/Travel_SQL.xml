@@ -7,7 +7,7 @@
 
 	<insert id="insertTravelName" parameterType="travel" useGeneratedKeys="true" keyProperty="Travel_id">  
 	    <![CDATA[
-	    insert into travelDB (TravelName)
+	    insert into traveldb (TravelName)
 	    values (#{TravelName})
 	    ]]>
 	</insert>

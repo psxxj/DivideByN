@@ -5,7 +5,7 @@
 
 	<insert id="insertEventInfo" parameterType="event" useGeneratedKeys="true" keyProperty="Event_id">  
 	    <![CDATA[
-	    insert into eventDB
+	    insert into eventdb
 	    (EventName, Participant2String, PayerName, EventDate, Price, TravelName, DividePrice, GetPrice) 
 	    values
 	    (#{EventName}, #{Participant2String}, #{PayerName}, #{EventDate}, #{Price}, #{TravelName}, #{DividePrice}, #{GetPrice})
@@ -16,7 +16,7 @@
 		<![CDATA[
 			select *
 			from
-			eventDB
+			eventdb
 			where
 			TravelName = #{TravelName}
 		]]>
@@ -27,7 +27,7 @@
 			select
 			EventDate
 			from
-			eventDB
+			eventdb
 			where
 			TravelName = #{TravelName}
 			order by
@@ -41,7 +41,7 @@
 			select
 			EventDate
 			from
-			eventDB
+			eventdb
 			where
 			TravelName = #{TravelName}
 			order by
@@ -55,7 +55,7 @@
 			select
 			count(*)
 			from
-			eventDB
+			eventdb
 			where
 			TravelName = #{TravelName}
 		]]>
@@ -65,7 +65,7 @@
 		<![CDATA[
 			select *
 			from
-			eventDB
+			eventdb
 			where
 			EventName = #{EventName}
 		]]>
@@ -76,7 +76,7 @@
 		<![CDATA[
 			select *
 			from
-			eventDB
+			eventdb
 			where
 			Participant2String LIKE
 			concat('%', #{PersonName}, '%')
