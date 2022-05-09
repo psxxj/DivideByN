@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { users } from "./users";
+import { users } from "./Var";
 import personSrc from "../img/person.png";
 
 var eventList = [
@@ -29,12 +29,24 @@ var eventList = [
   },
 ];
 
+var payer = [];
+var participants = [...users];
 function CreateEvent() {
-  var payer = [];
-  var participants = [...users];
-  var place;
-  var price;
-  var date;
+  const [inputs, setInputs] = useState({
+    place: "",
+    price: "",
+    date: "",
+  });
+
+  const { place, price, date } = inputs;
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
 
   function CreateUser({ user }) {
     const [participate, setParticipate] = useState("participate");
@@ -68,33 +80,20 @@ function CreateEvent() {
   }
 
   const onClickSubmit = (e) => {
-    place = document.querySelector("#place").value;
-    price = document.querySelector("#price").value;
-    date = document.querySelector("#date").value;
-    if (place === "") {
-      alert("장소를 입력하세요");
-      e.preventDefault();
-    } else if (price === "") {
-      alert("액수를 입력하세요");
-      e.preventDefault();
-    } else if (date === "") {
-      alert("날짜를 입력하세요");
-      e.preventDefault();
-    } else if (payer.length === 1) {
+    if (payer.length === 1) {
       console.log("okay");
       const newEvent = {
         index: eventList.length + 1,
-        place: place,
+        place: document.querySelector("#place").value,
         name: payer[0],
-        price: price,
-        date: date,
+        price: document.querySelector("#price").value,
+        date: document.querySelector("#date").value,
         participants: participants,
       };
       console.log(participants);
       eventList.push(newEvent);
     } else if (payer.length > 1) {
       alert("결제자는 한 명이어야 합니다\nError: Too Many Payers");
-      e.preventDefault();
     } else if (payer.length === 0) {
       alert("결제자는 한 명이어야 합니다\nError: No Payer");
       e.preventDefault();
@@ -109,6 +108,7 @@ function CreateEvent() {
           type="text"
           id="place"
           name="place"
+          onChange={onChange}
           value={place}
           size="5"
         />
@@ -117,6 +117,7 @@ function CreateEvent() {
           type="text"
           id="price"
           name="price"
+          onChange={onChange}
           value={price}
           size="5"
         />
@@ -125,6 +126,7 @@ function CreateEvent() {
           type="date"
           id="date"
           name="date"
+          onChange={onChange}
           value={date}
           size="5"
         />

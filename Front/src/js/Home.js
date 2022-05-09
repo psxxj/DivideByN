@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import DisplayUsers from "./DisplayUsers";
 import Events from "./Events";
-import { eventList } from "./CreateEvent";
 import { Link } from "react-router-dom";
-import { users } from "./users";
+import { users, eventList } from "./Var";
 
-const Home = () => {
+const Home = ({ username, travelName }) => {
   let initialPreferences = {
     displayIcon: true,
     displayMoney: true,
@@ -52,7 +51,11 @@ const Home = () => {
         ))}
       </div>
       <div className="App">
-        <DisplayUsers users={users} preferences={preferences} />
+        <DisplayUsers
+          users={users}
+          preferences={preferences}
+          travelName={travelName}
+        />
         <NavigationBar
           preferences={preferences}
           setPreferences={setPreferences}

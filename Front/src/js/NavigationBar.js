@@ -51,9 +51,11 @@ function NavigationBar({ preferences, setPreferences }) {
         <div>
           <span>{loggedIn}</span>
           <br />
-          <button style={{ margin: "10px auto 0 0" }} onClick={onLogOutClick}>
-            Log Out
-          </button>
+          <Link to="/">
+            <button style={{ margin: "10px auto 0 0" }} onClick={onLogOutClick}>
+              Log Out
+            </button>
+          </Link>
         </div>
       ) : (
         <Link to="/login">

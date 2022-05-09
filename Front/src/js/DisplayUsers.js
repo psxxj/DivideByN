@@ -7,7 +7,7 @@ function DisplayUsers({ users, preferences }) {
   function CreateUser({ user }) {
     return (
       <div className="user">
-        <Link to={`/profile/${user.name}`}>
+        <Link to={`/${user.name}/profile`}>
           {preferences.displayIcon ? (
             <img className="icon" src={personSrc} alt="profile" />
           ) : null}

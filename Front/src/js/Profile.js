@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { users } from "./users";
+import { users } from "./Var";
 
 const Profile = () => {
   const { username } = useParams();
