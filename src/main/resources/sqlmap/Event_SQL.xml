@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mydiv.Mapper.EventMapper">
+
+	<insert id="insertEventInfo" parameterType="event" useGeneratedKeys="true" keyProperty="Event_id">  
+	    <![CDATA[
+	    insert into eventdb
+	    (EventName, Participant2String, PayerName, EventDate, Price, TravelName, DividePrice, GetPrice) 
+	    values
+	    (#{EventName}, #{Participant2String}, #{PayerName}, #{EventDate}, #{Price}, #{TravelName}, #{DividePrice}, #{GetPrice})
+	    ]]>
+	</insert>
+	
+	<select id="getEventBriefly" parameterType="String" resultType="event">
+		<![CDATA[
+			select *
+			from
+			eventdb
+			where
+			TravelName = #{TravelName}
+		]]>
+	</select>
+	
+	<select id="getOldest" parameterType="String" resultType="Date">
+		<![CDATA[
+			select
+			EventDate
+			from
+			eventdb
+			where
+			TravelName = #{TravelName}
+			order by
+			EventDate ASC
+			limit 1
+		]]>
+	</select>
+
+	<select id="getLatest" parameterType="String" resultType="Date">
+		<![CDATA[
+			select
+			EventDate
+			from
+			eventdb
+			where
+			TravelName = #{TravelName}
+			order by
+			EventDate DESC
+			limit 1
+		]]>
+	</select>
+
+	<select id="getEventNum" parameterType="String" resultType="int">
+		<![CDATA[
+			select
+			count(*)
+			from
+			eventdb
+			where
+			TravelName = #{TravelName}
+		]]>
+	</select>
+
+	<select id="getEventDetail" parameterType="event" resultType="event">
+		<![CDATA[
+			select *
+			from
+			eventdb
+			where
+			EventName = #{EventName}
+		]]>
+	</select>
+
+
+	<select id="getWhatEventIn" parameterType="person" resultType="event">
+		<![CDATA[
+			select *
+			from
+			eventdb
+			where
+			Participant2String LIKE
+			concat('%', #{PersonName}, '%')
+		]]>
+	</select>
+
+
+</mapper>

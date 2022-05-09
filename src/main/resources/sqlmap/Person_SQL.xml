@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.spring.mydiv.Mapper.PersonMapper">
+
+	<insert id="insertPersonInfo" parameterType="person" useGeneratedKeys="true" keyProperty="Person_id">  
+	    <![CDATA[
+	    insert into persondb
+	    (PersonName, Account, TravelName) 
+	    values
+	    (#{PersonName}, #{Account}, #{TravelName})
+	    ]]>
+	</insert>
+
+	<select id="getPersonBriefly" parameterType="String" resultType="person">
+		<![CDATA[
+			select *
+			from
+			persondb
+			where
+			TravelName = #{TravelName}
+		]]>
+	</select>
+	
+	<update id="updatePersonMoney" parameterType="person">  
+		<![CDATA[
+		update persondb set
+		sumSend = #{sumSend},
+		sumGet = #{sumGet},
+		Difference = #{Difference}
+		where Person_id = #{Person_id}  
+		]]>  
+	</update>
+	
+	<select id="getWhoInTravelAll" parameterType="travel" resultType="person">
+		<![CDATA[
+			select *
+			from
+			persondb
+			where
+			TravelName = #{TravelName}
+		]]>
+	</select>
+	
+	<update id="updatePersonRole" parameterType="person">  
+		<![CDATA[
+		update persondb set
+		Role = #{Role}
+		where  
+		Person_id = #{Person_id}  
+		]]>  
+	</update>  
+	
+	<select id="getWhoInTravelName" parameterType="String" resultType="String">
+		<![CDATA[
+			select PersonName
+			from
+			persondb
+			where
+			TravelName = #{TravelName}
+		]]>
+	</select>
+
+	<select id="getPersonDetail" parameterType="person" resultType="person">
+		<![CDATA[
+			select *
+			from
+			persondb
+			where
+			Person_id = #{Person_id} AND
+			TravelName = #{TravelName}
+		]]>
+	</select>
+
+	<select id="getGETTER" parameterType="person" resultType="person">
+		<![CDATA[
+			select
+			PersonName,
+			Difference
+			from
+			persondb
+			where
+			TravelName = #{TravelName} AND
+			Role = 'GETTER'
+		]]>
+	</select>
+	
+	<select id="getSENDER" parameterType="person" resultType="person">
+		<![CDATA[
+			select
+			PersonName,
+			Difference
+			from
+			persondb
+			where
+			TravelName = #{TravelName} AND
+			Role = 'SENDER'
+		]]>
+	</select>
+	
+	<select id="getLEADER" parameterType="person" resultType="String">
+		<![CDATA[
+			select
+			PersonName
+			from
+			persondb
+			where
+			TravelName = #{TravelName} AND
+			Role = 'LEADER'
+		]]>
+	</select>
+
+
+</mapper>

@@ -1,0 +1,39 @@
+package com.spring.mydiv.Service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+
+import com.spring.mydiv.Dto.Event;
+import com.spring.mydiv.Mapper.EventMapper;
+import com.spring.mydiv.Mapper.PersonMapper;
+@SpringBootTest
+class TSgetTravelPeriodTest {
+	@Autowired
+	TravelServiceImpl travelService;
+	@Autowired
+	EventMapper eventMapper;
+	
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+    @Commit
+    @DisplayName("getPeriod")
+	void testGetTravelPeriod() {
+		String travelName = "divide";
+		Event event = this.eventMapper.getEventBriefly(travelName).get(1);
+		String travelperiod = travelService.getTravelPeriod(event);
+		System.out.println(travelName+" period = " + travelperiod);
+		//fail("Not yet implemented"); // TODO
+	}
+
+}
