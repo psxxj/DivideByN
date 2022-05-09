@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { users } from "./users";
+import { users } from "./Var";
 import personSrc from "../img/person.png";
-import { travelTitle } from "./StartPage";
+
 var eventList = [
   {
+    index: 1,
     place: "newEvent",
     name: "me",
     price: "101010",
-    date: "2022-02-28",
+    date: "2022/02/28",
     participants: ["sungjun", "haeun", "jangwon", "yooseung"],
   },
   {
+    index: 2,
     place: "place",
     name: "name",
     price: "price",
-    date: "2021-01-01",
+    date: "date",
     participants: [
       "sungjun",
       "haeun",
@@ -27,23 +29,33 @@ var eventList = [
   },
 ];
 
+var payer = [];
+var participants = [...users];
 function CreateEvent() {
-  var payer = [];
-  var participants = users.map((user) => user.name);
-  console.log(participants);
-  var place;
-  var price;
-  var date;
+  const [inputs, setInputs] = useState({
+    place: "",
+    price: "",
+    date: "",
+  });
 
-  function CreateUserIcon({ user }) {
+  const { place, price, date } = inputs;
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  function CreateUser({ user }) {
     const [participate, setParticipate] = useState("participate");
     const [nameColor, setNameColor] = useState("green");
     const onClickIcon = () => {
       if (participate === "participate") {
         setParticipate("no");
         setNameColor("black");
-        const index = participants.indexOf(user.name);
-        participants.splice(index, 1);
+        participants.pop(user.name);
       } else if (participate === "no") {
         setParticipate("payer");
         setNameColor("blue");
@@ -54,6 +66,7 @@ function CreateEvent() {
         setNameColor("green");
         payer.pop(user.name);
       }
+      console.log(payer);
       console.log(participants);
     };
 
@@ -67,41 +80,20 @@ function CreateEvent() {
   }
 
   const onClickSubmit = (e) => {
-    place = document.querySelector("#place").value;
-    price = document.querySelector("#price").value;
-    date = document.querySelector("#date").value;
-    if (place === "") {
-      alert("장소를 입력하세요");
-      e.preventDefault();
-    } else if (price === "") {
-      alert("액수를 입력하세요");
-      e.preventDefault();
-    } else if (date === "") {
-      alert("날짜를 입력하세요");
-      e.preventDefault();
-    } else if (payer.length === 1) {
+    if (payer.length === 1) {
       console.log("okay");
       const newEvent = {
-        place: place,
+        index: eventList.length + 1,
+        place: document.querySelector("#place").value,
         name: payer[0],
-        price: price,
-        date: date,
+        price: document.querySelector("#price").value,
+        date: document.querySelector("#date").value,
         participants: participants,
       };
       console.log(participants);
       eventList.push(newEvent);
-      const sortedEventList = eventList.sort(function (a, b) {
-        return a.date - b.date;
-      });
-      const sortedUsers = users.sort(function (a, b) {
-        return a.spent - b.spent;
-      });
-      console.log(sortedUsers);
-      eventList = sortedEventList;
-      console.log(eventList);
     } else if (payer.length > 1) {
       alert("결제자는 한 명이어야 합니다\nError: Too Many Payers");
-      e.preventDefault();
     } else if (payer.length === 0) {
       alert("결제자는 한 명이어야 합니다\nError: No Payer");
       e.preventDefault();
@@ -116,6 +108,7 @@ function CreateEvent() {
           type="text"
           id="place"
           name="place"
+          onChange={onChange}
           value={place}
           size="5"
         />
@@ -124,6 +117,7 @@ function CreateEvent() {
           type="text"
           id="price"
           name="price"
+          onChange={onChange}
           value={price}
           size="5"
         />
@@ -132,16 +126,17 @@ function CreateEvent() {
           type="date"
           id="date"
           name="date"
+          onChange={onChange}
           value={date}
           size="5"
         />
       </div>
       <div>
         {users.map((user) => (
-          <CreateUserIcon user={user} key={user.name} />
+          <CreateUser user={user} key={user.index} />
         ))}
       </div>
-      <Link to={`/${travelTitle}`} onClick={onClickSubmit}>
+      <Link to="/" onClick={onClickSubmit}>
         <button>이벤트 추가</button>
       </Link>
     </div>

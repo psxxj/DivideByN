@@ -1,5 +1,6 @@
 export const users = [
   {
+    index: 1,
     name: "yooseung",
     type: "Manager",
     account: 111111,
@@ -7,6 +8,7 @@ export const users = [
     events: ["a"],
   },
   {
+    index: 2,
     name: "sungjun",
     type: "Depositors",
     account: 111112,
@@ -14,6 +16,7 @@ export const users = [
     events: ["b"],
   },
   {
+    index: 3,
     name: "jangwon",
     type: "Depositors",
     account: 111113,
@@ -21,6 +24,7 @@ export const users = [
     events: ["c"],
   },
   {
+    index: 4,
     name: "haeun",
     type: "Recipients",
     account: 111114,
@@ -28,6 +32,7 @@ export const users = [
     events: ["c"],
   },
   {
+    index: 5,
     name: "prof.Hwang",
     type: "Recipients",
     account: 111115,
@@ -35,6 +40,7 @@ export const users = [
     events: ["a"],
   },
   {
+    index: 6,
     name: "heejeong",
     type: "Recipients",
     account: 3333180421,
@@ -42,6 +48,7 @@ export const users = [
     events: ["Taxi", "SRT", "Beer", "Soju"],
   },
   {
+    index: 7,
     name: "doyoon",
     type: "Depositors",
     account: 1240232432,
@@ -49,6 +56,7 @@ export const users = [
     events: ["date", "nba", "study", "starbucks", "eungae"],
   },
   {
+    index: 8,
     name: "seyeon",
     type: "Depositors",
     account: 3333181769445,
@@ -56,6 +64,7 @@ export const users = [
     events: ["crossfit", "eat", "dummy", "minions", "abc", "jeongsangsu"],
   },
   {
+    index: 9,
     name: "gyojoon",
     type: "Recipients",
     account: 14098390290481,
@@ -63,6 +72,7 @@ export const users = [
     events: ["date", "lotteworld", "seyeon", "gktpdus", "toefl", "busan"],
   },
   {
+    index: 10,
     name: "d'Aurial",
     type: "Depositors",
     account: 2900431421,

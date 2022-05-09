@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { eventList } from "./CreateEvent";
+import { eventList } from "./Var";
 
 const EventDescription = () => {
-  console.log(eventList);
   const { place } = useParams();
   const description = eventList.filter((event) => event.place === place)[0];
   return (
@@ -12,13 +11,9 @@ const EventDescription = () => {
       <h2 id="headers">name: {description.name}</h2>
       <h2 id="headers">price: {description.price}</h2>
       <h2 id="headers">date: {description.date}</h2>
-      <h2 id="headers">participants: </h2>
       <div style={{ display: "flex" }}>
         {description.participants.map((participant) => (
-          <h3 style={{ margin: "0 auto" }} key={participant}>
-            {" "}
-            {participant}{" "}
-          </h3>
+          <h3 style={{ margin: "0 auto" }}> {participant} </h3>
         ))}
       </div>
     </div>

@@ -3,16 +3,15 @@ import gearSrc from "../img/gearshape.png";
 import bracketSrc from "../img/leftAngleBracket.jpeg";
 import calendarSrc from "../img/calendar.png";
 import { Link } from "react-router-dom";
-import { travelTitle } from "./StartPage";
 
 function NavigationBar({ preferences, setPreferences }) {
   const [tabActive, setTabActive] = React.useState("none");
   const [loggedIn, setLoggedIn] = React.useState(
-    JSON.parse(sessionStorage.getItem("id"))
+    JSON.parse(localStorage.getItem("id"))
   );
 
   const onLogOutClick = () => {
-    sessionStorage.removeItem("id");
+    localStorage.removeItem("id");
     setLoggedIn(null);
   };
   const onClickDisplayIcon = () => {
@@ -52,9 +51,11 @@ function NavigationBar({ preferences, setPreferences }) {
         <div>
           <span>{loggedIn}</span>
           <br />
-          <button style={{ margin: "10px auto 0 " }} onClick={onLogOutClick}>
-            Log Out
-          </button>
+          <Link to="/">
+            <button style={{ margin: "10px auto 0 0" }} onClick={onLogOutClick}>
+              Log Out
+            </button>
+          </Link>
         </div>
       ) : (
         <Link to="/login">
@@ -74,7 +75,7 @@ function NavigationBar({ preferences, setPreferences }) {
       <br />
       <img className="barIconReversed" src={bracketSrc} alt="rightBracket" />
       <br />
-      <Link to={`/${travelTitle}/calendar`}>
+      <Link to="/calendar">
         <img className="barIcon" src={calendarSrc} alt="calendar" />
       </Link>
     </div>

@@ -57,9 +57,9 @@ img {
 }
 
 button {
+  vertical-align: top;
   text-align: center;
-  text-decoration: none;
-  display: block;
+  display: inline-block;
   margin: 20px auto;
 }
 

@@ -1,9 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { users } from "./users";
+import { users } from "./Var";
 
 const Profile = () => {
   const { username } = useParams();
+  console.log(username);
   const profile = users.filter((user) => user.name === username)[0];
 
   const displayEvents = () => {
@@ -11,8 +12,8 @@ const Profile = () => {
 
     return (
       <div style={{ display: "flex" }}>
-        {events.map((event) => (
-          <h3 style={{ display: "block", margin: "0 auto" }} key={event}>
+        {events.map((event, index) => (
+          <h3 style={{ display: "block", margin: "0 auto" }} key={index}>
             {event}
           </h3>
         ))}

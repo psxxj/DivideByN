@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import DisplayUsers from "./DisplayUsers";
 import Events from "./Events";
-import { eventList } from "./CreateEvent";
 import { Link } from "react-router-dom";
-import { users } from "./users";
-import { travelTitle } from "./StartPage";
+import { users, eventList } from "./Var";
 
-const Home = () => {
+const Home = ({ username, travelName }) => {
   let initialPreferences = {
     displayIcon: true,
     displayMoney: true,
@@ -36,7 +34,7 @@ const Home = () => {
             textAlign: "center",
           }}
         >
-          {travelTitle}
+          N분의 1로
         </h1>
       </div>
       <div style={{ margin: "1.5%" }}>
@@ -48,13 +46,16 @@ const Home = () => {
         </Link>
       </div>
       <div className="box1">
-        <h5 id="headers">결제내역 총 {eventList.length} 건</h5>
         {eventList.map((event) => (
-          <Events event={event} key={event.place} />
+          <Events event={event} key={event.index} />
         ))}
       </div>
       <div className="App">
-        <DisplayUsers users={users} preferences={preferences} />
+        <DisplayUsers
+          users={users}
+          preferences={preferences}
+          travelName={travelName}
+        />
         <NavigationBar
           preferences={preferences}
           setPreferences={setPreferences}

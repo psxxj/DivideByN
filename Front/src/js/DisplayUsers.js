@@ -7,7 +7,7 @@ function DisplayUsers({ users, preferences }) {
   function CreateUser({ user }) {
     return (
       <div className="user">
-        <Link to={`/profile/${user.name}`}>
+        <Link to={`/${user.name}/profile`}>
           {preferences.displayIcon ? (
             <img className="icon" src={personSrc} alt="profile" />
           ) : null}
@@ -45,7 +45,7 @@ function DisplayUsers({ users, preferences }) {
           {users
             .filter((user) => user.type === type)
             .map((user) => (
-              <CreateUser user={user} key={user.name} />
+              <CreateUser user={user} key={user.index} />
             ))}
         </div>
         <hr />
