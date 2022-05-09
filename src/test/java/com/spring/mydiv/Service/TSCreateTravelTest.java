@@ -19,7 +19,7 @@ class TSCreateTravelTest {
     @Commit
     @DisplayName("CreateTravel")
 	void testCreateTravel() {
-		Travel travel = new Travel("eecs");
+		Travel travel = new Travel("0504 haeun1");
 		String insertName = travelService.CreateTravel(travel);
         System.out.print("name = " + insertName);
 		//fail("Not yet implemented");

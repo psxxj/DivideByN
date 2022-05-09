@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.spring.mydiv.Dto.Travel;
 
-
+//TravelRepository
 @Mapper
 public interface TravelMapper {
 	

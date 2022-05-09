@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.spring.mydiv.Dto.Event;
 import com.spring.mydiv.Dto.Person;
 
+//PersonRepository
 @Mapper
 public interface PersonMapper {
 
