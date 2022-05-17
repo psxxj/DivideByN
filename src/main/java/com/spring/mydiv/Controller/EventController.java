@@ -1,32 +1,40 @@
 package com.spring.mydiv.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.mydiv.Dto.Event;
-import com.spring.mydiv.Dto.Person;
-import com.spring.mydiv.Service.EventService;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+//@RequestMapping("/api")
 public class EventController {
-	@Autowired
-	private EventService eventService;
 	
-	@RequestMapping("/createEvent")
-	public ModelAndView eventCreate(@ModelAttribute("event") Event event) {
-		
-		eventService.CreateEvent(event);
-		
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/"); // ¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â
-		mv.addObject("main", "¸ŞÀÎ È­¸é¸¦ ³ªÅ¸³»´Âµ¥ ÇÊ¿äÇÑ ¸ğµç µ¥ÀÌÅÍ");
-		return mv;
-		
+	@PostMapping("/{userid}/{travelid}/createEvent")
+	public List<String> getPersonNameByTravelId(@PathVariable int travelid){
+		//@PathVariable = ì—¬í–‰ ì•„ì´ë””
+		//return service. person DBì—ì„œ travelidë‘ ì¼ì¹˜í•˜ëŠ” ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ "ì´ë¦„ë§Œ" ë¦¬í„´
 	}
 	
+	@PostMapping("/{userid}/{travelid}/createEvent")
+	public void createEvent(@RequestBody Event newevent){
+		//RequestBody = ìƒì„±í•  ì´ë²¤íŠ¸ ì •ë³´
+		//return service.
+		//	event Dbì— event ì •ë³´ ë“±ë¡ & participant DBì—ë„ ë“±ë¡
+		//	participant DBì—ì„œ role & difference ìˆ˜ì •
+	}
+	
+	@PostMapping("/{userid}/{travelid}/{eventid}")
+	public Event getEventInfoByEventId(@PathVariable int eventid){
+		//@PathVariable = ìƒì„±í•œ ì´ë²¤íŠ¸ ì•„ì´ë””
+		//return service. event DB & participant DBì—ì„œ ì •ë³´ ë¦¬í„´
+	}
+
 }
