@@ -1,10 +1,8 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import API from "../API";
 
-const Register = () => {
-  const baseUrl = "http://localhost:8001"
-  
+const Register = () => {  
   const [user_name, setname] = useState("");
   const [user_account,setaccout] = useState("");
   const [user_email, setEmail] = useState("");
@@ -32,7 +30,7 @@ const Register = () => {
   };
 
   const CreateUser = async () => {
-    await axios.post(baseUrl+'/register',{
+    await API.post('/register',{
       user_name : user_name,
       user_email : user_email,
       user_password : user_password,
@@ -41,6 +39,10 @@ const Register = () => {
     .then((response) =>{
       if(response) {
         window.alert("Succesfully registrated")
+        console.log(response)
+      }
+      else {
+        window.alert("Sever error, try again");
       }
       setname("");
       setEmail("");
@@ -53,8 +55,25 @@ const Register = () => {
     })
   }
 
+  // const onSubmit = (event) => {
+  //   if (user_email == null) {
+  //     event.preventDefault();
+  //     alert("Given ID already exists");
+  //   } else if (user_password !== confirmPassword) {
+  //     event.preventDefault();
+  //     alert("Passwords do not match");
+  //   } else if (user_password.length < 5) {
+  //     event.preventDefault();
+  //     alert("Password is too short");
+  //   } else {
+  //     event.preventDefault();
+  //     console.log(user_name,user_account,user_email,user_password);
+  //     CreateUser();
+  //   }
+  // };
+
   const onSubmit = (event) => {
-    if (user_email == null) {
+    if (localStorage.getItem(user_email) !== null) {
       event.preventDefault();
       alert("Given ID already exists");
     } else if (user_password !== confirmPassword) {
@@ -65,9 +84,7 @@ const Register = () => {
       alert("Password is too short");
     } else {
       alert("Succesfully Registered");
-      event.preventDefault();
-      console.log(user_name,user_account,user_email,user_password);
-      CreateUser();
+      localStorage.setItem(user_email, JSON.stringify(user_password));
     }
   };
 
@@ -112,9 +129,11 @@ const Register = () => {
             onChange={onConfirmPasswordHandler}
           />
         </div>
+        <Link to = "/login">
           <div>
             <button onClick={onSubmit}>Submit</button>
           </div>
+         </Link>
       </form>
     </div>
   );

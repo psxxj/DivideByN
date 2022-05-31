@@ -38,6 +38,8 @@ function CreateEvent() {
     date: "",
   });
 
+  
+
   const { place, price, date } = inputs;
 
   const onChange = (e) => {

@@ -2,14 +2,15 @@ import React from "react";
 import "./App.css";
 import Home from "./js/Home";
 import Profile from "./js/Profile";
-import LogIn from "./js/LogIn";
-import Register from "./js/Register";
+import LogIn from "./Authentication/LogIn";
+import Register from "./Authentication/Register";
 import Calendar from "./js/Calendar";
 import { CreateEvent } from "./js/CreateEvent";
 import CreateUser from "./js/CreateUser";
 import EventDescription from "./js/EventDescription";
 import { Routes, Route } from "react-router-dom";
 import SelectTravel from "./js/SelectTravel";
+import UserList from "./Authentication/UserList";
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
           path="/:username/:travel/event/:event"
           element={<EventDescription />}
         />
-        <Route path="/:username/selectTravel" element={<SelectTravel />} />
+        <Route path="/:username/:su/selectTravel" element={<SelectTravel />} />
         <Route path="/:username/:travel" element={<Home />} />
       </Routes>
     </div>
