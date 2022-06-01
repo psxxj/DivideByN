@@ -30,20 +30,14 @@ const Register = () => {
   };
 
   const CreateUser = async () => {
-    await API.post('/register',{
+    await API.post('/Register',{
       user_name : user_name,
       user_email : user_email,
       user_password : user_password,
       user_account : user_account
     })
     .then((response) =>{
-      if(response) {
-        window.alert("Succesfully registrated")
-        console.log(response)
-      }
-      else {
-        window.alert("Sever error, try again");
-      }
+      console.log(response);
       setname("");
       setEmail("");
       setaccout("");
@@ -53,27 +47,10 @@ const Register = () => {
     .catch((error) => {
       console.log(error);
     })
-  }
-
-  // const onSubmit = (event) => {
-  //   if (user_email == null) {
-  //     event.preventDefault();
-  //     alert("Given ID already exists");
-  //   } else if (user_password !== confirmPassword) {
-  //     event.preventDefault();
-  //     alert("Passwords do not match");
-  //   } else if (user_password.length < 5) {
-  //     event.preventDefault();
-  //     alert("Password is too short");
-  //   } else {
-  //     event.preventDefault();
-  //     console.log(user_name,user_account,user_email,user_password);
-  //     CreateUser();
-  //   }
-  // };
+  };
 
   const onSubmit = (event) => {
-    if (localStorage.getItem(user_email) !== null) {
+    if (user_email == null) {
       event.preventDefault();
       alert("Given ID already exists");
     } else if (user_password !== confirmPassword) {
@@ -83,10 +60,27 @@ const Register = () => {
       event.preventDefault();
       alert("Password is too short");
     } else {
-      alert("Succesfully Registered");
-      localStorage.setItem(user_email, JSON.stringify(user_password));
+      event.preventDefault();
+      console.log(user_name,user_account,user_email,user_password);
+      CreateUser();
     }
   };
+
+  // const onSubmit = (event) => {
+  //   if (localStorage.getItem(user_email) !== null) {
+  //     event.preventDefault();
+  //     alert("Given ID already exists");
+  //   } else if (user_password !== confirmPassword) {
+  //     event.preventDefault();
+  //     alert("Passwords do not match");
+  //   } else if (user_password.length < 5) {
+  //     event.preventDefault();
+  //     alert("Password is too short");
+  //   } else {
+  //     alert("Succesfully Registered");
+  //     localStorage.setItem(user_email, JSON.stringify(user_password));
+  //   }
+  // };
 
   return (
     <div>

@@ -19,7 +19,7 @@ const SelectTravel = () => {
   },[]);
   
   const getInfor = async() => {
-    await axios.all([ API.get("/userlist"), API.get("travelList")])
+    await axios.all([ API.get("/userlist"), API.get(+"travelList")])
     .then(
       axios.spread((res_user, res_travel) => {
         console.log("userlist : ",res_user.data);

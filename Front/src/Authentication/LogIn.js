@@ -59,7 +59,10 @@ const LogIn = () => {
       input_id : input_id,
       input_password : input_password
     }).then((response) => {
-      setisLogin(true);
+      if(!response.data) {
+        event.preventDefault();
+        
+      }
     }).catch((error) => {
       event.preventDefault();
       console.log(error);
